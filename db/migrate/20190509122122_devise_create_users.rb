@@ -40,6 +40,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.boolean :expires
       t.string :refresh_token
 
+      ## Adminable
+      t.boolean :admin, null: false, default: false
+
+
       t.timestamps null: false
     end
 

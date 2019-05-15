@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+
+<iframe width="853" height="480" src="https://www.youtube.com/embed/<%= @video.yt_id %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>
+  <strong>Name:</strong>
+  <%= @video.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @video.description %>
+</p>
+
+<p>
+  <strong>Thumbnail url:</strong>
+  <%= @video.thumbnail_url %>
+</p>
+
+<p>
+  <strong>Published at:</strong>
+  <%= @video.published_at %>
+</p>
+
+<% if policy(@video).edit? %>
+  <%= link_to 'Edit', edit_video_path(@video) %> |
+<% end %>
+<%= link_to 'Back', videos_path %>

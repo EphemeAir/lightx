@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_09_122122) do
+ActiveRecord::Schema.define(version: 2019_05_14_143902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "channels", force: :cascade do |t|
+    t.string "yt_id"
+    t.string "name"
+    t.bigint "user_id"
+    t.text "description"
+    t.string "thumbnail_url"
+    t.time "published_at"
+    t.boolean "public"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_channels_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,10 +40,28 @@ ActiveRecord::Schema.define(version: 2019_05_09_122122) do
     t.integer "expires_at"
     t.boolean "expires"
     t.string "refresh_token"
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "videos", force: :cascade do |t|
+    t.string "yt_id"
+    t.string "name"
+    t.bigint "channel_id"
+    t.text "description"
+    t.string "thumbnail_url"
+    t.integer "duration"
+    t.boolean "captioned"
+    t.time "published_at"
+    t.boolean "tagged"
+    t.boolean "public"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_videos_on_channel_id"
+  end
+
+  add_foreign_key "videos", "channels"
 end

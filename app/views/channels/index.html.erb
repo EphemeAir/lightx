@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Channels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Yt</th>
+      <th>Name</th>
+      <th>User</th>
+      <th>Description</th>
+      <th>Thumbnail url</th>
+      <th>Published at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @channels.each do |channel| %>
+      <tr>
+        <td><%= channel.yt_id %></td>
+        <td><%= channel.name %></td>
+        <td><%= channel.user.email %></td>
+        <td><%= channel.description %></td>
+        <td><%= channel.thumbnail_url %></td>
+        <td><%= channel.published_at %></td>
+        <% if policy(channel).show? %>
+          <td><%= link_to 'Show', channel %></td>
+        <% end %>
+        <% if policy(channel).edit? %>
+          <td><%= link_to 'Edit', edit_channel_path(channel) %></td>
+        <% end %>
+        <% if policy(channel).destroy? %>
+          <td><%= link_to 'Destroy', channel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Channel', new_channel_path %>
