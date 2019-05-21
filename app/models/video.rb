@@ -1,4 +1,8 @@
 class Video < ApplicationRecord
+
+  validates :yt_id, :name, presence: true
+  validates :yt_id, uniqueness: true
+
   belongs_to :channel
 
     def self.from_yt(yt_id)

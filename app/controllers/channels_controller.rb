@@ -2,33 +2,24 @@ class ChannelsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
 
-  # GET /channels
-  # GET /channels.json
   def index
     # @channels = Channel.all
     @channels = policy_scope(Channel)
   end
 
-  # GET /channels/1
-  # GET /channels/1.json
   def show
   end
 
-  # GET /channels/new
   def new
     @channel = Channel.new
     authorize @channel
   end
 
-  # GET /channels/1/edit
   def edit
   end
 
-  # POST /channels
-  # POST /channels.json
   def create
-    # raise
-    @channel = Channel.from_yt(channel_params["yt_id"])
+    @channel = Channel.from_yt(channel_new_params["yt_id"])
     @channel.user = current_user
     authorize @channel
 
@@ -43,11 +34,9 @@ class ChannelsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /channels/1
-  # PATCH/PUT /channels/1.json
   def update
     respond_to do |format|
-      if @channel.update(channel_params)
+      if @channel.update(channel_edit_params)
         format.html { redirect_to @channel, notice: 'Channel was successfully updated.' }
         format.json { render :show, status: :ok, location: @channel }
       else
@@ -57,8 +46,6 @@ class ChannelsController < ApplicationController
     end
   end
 
-  # DELETE /channels/1
-  # DELETE /channels/1.json
   def destroy
     @channel.destroy
     respond_to do |format|
@@ -75,8 +62,12 @@ class ChannelsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def channel_params
-      params.require(:channel).permit(:yt_id, :description)
+    def channel_new_params
+      params.require(:channel).permit(:yt_id)
+    end
+
+    def channel_edit_params
+      params.require(:channel).permit(:yt_id)
     end
 
 end

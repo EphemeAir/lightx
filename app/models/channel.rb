@@ -4,7 +4,7 @@ class Channel < ApplicationRecord
   validates :yt_id, :name, uniqueness: true
 
   belongs_to :user
-  has_many :videos
+  has_many :videos, dependent: :destroy
 
   def self.from_yt(yt_id)
    # Either create a User record or update it based on the provider (Google) and the UID

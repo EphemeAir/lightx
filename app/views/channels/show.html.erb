@@ -25,6 +25,14 @@
   <%= @channel.published_at %>
 </p>
 
+<p>
+  <% @channel.videos.each do |video| %>
+    <%= link_to video_path(video) do %>
+      <%= image_tag video.thumbnail_url %>
+    <% end %>
+  <% end %>
+</p>
+
 <% if policy(@channel).edit? %>
   <%= link_to 'Edit', edit_channel_path(@channel) %> |
 <% end %>

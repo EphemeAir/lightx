@@ -20,6 +20,6 @@ class User < ApplicationRecord
   end
 
 
-  has_many :channels
+  has_many :channels, dependent: :destroy
 
 end
