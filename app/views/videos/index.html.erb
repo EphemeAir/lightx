@@ -1,42 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Videos</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Yt</th>
-      <th>Name</th>
-      <th>User</th>
-      <th>Thumbnail url</th>
-      <th>Published at</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @videos.each do |video| %>
-      <tr>
-        <td><%= video.yt_id %></td>
-        <td><%= video.name %></td>
-        <td><%= video.channel.user.email %></td>
-        <td><%= video.thumbnail_url %></td>
-        <td><%= video.published_at %></td>
-        <% if policy(video).show? %>
-          <td><%= link_to 'Show', video %></td>
-        <% end %>
+<ul>
+  <% @videos.each do |video| %>
+    <li><%= link_to "#{video.id} => #{video.name} by #{video.channel.user.email}", video_path(video) %>
+      <% if current_user %>
         <% if policy(video).edit? %>
-          <td><%= link_to 'Edit', edit_video_path(video) %></td>
+        | Edit this "video" by clicking <%= link_to "here", edit_video_path(video) %>
         <% end %>
         <% if policy(video).destroy? %>
-          <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
 
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if current_user %>
+  <% if policy(@videos).new? %>
+    <p>add a "video" by clicking <%= link_to "here", new_video_path %></p>
+  <% end %>
+<% end %>
 
-<br>
-
-<%= link_to 'New Video', new_video_path %>
+<p><%= link_to "Back", root_path %></p>

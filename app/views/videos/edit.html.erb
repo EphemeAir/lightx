@@ -1,6 +1,19 @@
-<h1>Editing Video</h1>
+<h2>Edit Video</h2>
 
-<%= render 'form', video: @video %>
+<%= simple_form_for(@video) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-<%= link_to 'Show', @video %> |
+  <div class="form-inputs">
+    <%= f.input :yt_id %>
+    <%= f.input :channel %>
+    <%= f.input :public %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
 <%= link_to 'Back', videos_path %>

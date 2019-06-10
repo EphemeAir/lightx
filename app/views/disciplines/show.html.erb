@@ -1,0 +1,9 @@
+<p>Associated grade : <%= @discipline.grade.name %></p>
+<p>Discipline name : <%= @discipline.name %></p>
+<p>Topics :</p>
+<ul>
+  <% @discipline.topics.each do |topic| %>
+    <li><%= topic.name %></li>
+  <% end %>
+</ul>
+

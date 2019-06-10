@@ -43,6 +43,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       ## Adminable
       t.boolean :admin, null: false, default: false
 
+      ## levelable
+      t.references :grade, foreign_key: true
 
       t.timestamps null: false
     end

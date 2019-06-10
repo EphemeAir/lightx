@@ -1,7 +1,14 @@
-<h1>Pages#home</h1>
+<h2>Pages#home</h2>
 <p>Find me in app/views/pages/home.html.erb</p>
+<% if current_user && policy(Channel).new? %>
+  <p>To add a "channel", please click <%= link_to "here", new_channel_path %></p>
+<% end %>
+<p>To access "channels", please click <%= link_to "here", channels_path %></p>
+<p>To access "videos", please click <%= link_to "here", videos_path %></p>
+<% if current_user && policy(Grade).index? %>
+  <p>To access "grades", please click <%= link_to "here", grades_path %></p>
+<% end %>
+
 <div class="links">
   <%= link_to "se connecter", user_session_path %>
-  <%= link_to "Videos", videos_path %>
-  <%= link_to "Channels", channels_path %>
 </div>

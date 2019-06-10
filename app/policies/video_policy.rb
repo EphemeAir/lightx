@@ -27,11 +27,11 @@ class VideoPolicy < ApplicationPolicy
 
   private
 
-    def user_is_owner_or_admin?
-      user.admin || record.channel.user == user
-    end
+  def user_is_owner_or_admin?
+    user_is_admin? || record.channel.user == user
+  end
 
-    def user_is_admin?
-      user.admin
-    end
+  def user_is_admin?
+    user.admin
+  end
 end

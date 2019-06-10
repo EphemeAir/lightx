@@ -4,6 +4,8 @@ class Video < ApplicationRecord
   validates :yt_id, uniqueness: true
 
   belongs_to :channel
+  has_many :video_topics
+  has_many :topics, through: :video_topics
 
     def self.from_yt(yt_id)
    # Either create a User record or update it based on the provider (Google) and the UID

@@ -19,6 +19,7 @@ class User < ApplicationRecord
    end
   end
 
+  belongs_to :grade, optional: true
 
   has_many :channels, dependent: :destroy
 

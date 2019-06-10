@@ -8,6 +8,7 @@ class CreateVideos < ActiveRecord::Migration[5.2]
       t.string :thumbnail_url
       t.integer :duration
       t.boolean :captioned
+      t.text :captions
       t.time :published_at
       t.boolean :tagged
       t.boolean :public
